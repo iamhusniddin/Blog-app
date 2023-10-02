@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useEffect } from "react";
-import useLoader from "../../store/zustand";
+// import useLoader from "../../store/zustand";
 
 
 
 function SignIn() {
   const navigate = useNavigate();
-  const { isLoading, startLoading, endLoading } = useLoader()
+  // const { isLoading, startLoading, endLoading } = useLoader()
   const toast = useToast()
   const [showPass, setShowPass] = useState(false)
   const pasRef = useRef()
@@ -27,7 +27,7 @@ function SignIn() {
   }, [showPass])
 
   const signInFunc = ()=>{
-    startLoading();
+    // startLoading();
     setTimeout(()=>{
       endLoading(true)
     },2000)
@@ -80,7 +80,7 @@ function SignIn() {
           }
           </div>
 
-          <Button isLoading={isLoading} onClick={()=> signInFunc()} className="w-full mt-[30px]" colorScheme="blue">
+          <Button  onClick={()=> signInFunc()} className="w-full mt-[30px]" colorScheme="blue">
             Sign in
           </Button>
         </FormControl>
