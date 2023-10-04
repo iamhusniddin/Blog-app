@@ -4,8 +4,8 @@ function App() {
   
 
   return (
-    <div className='text-red-700'>
-     <h1>hello world</h1>
+    <div>
+     
     </div>
   )
 }

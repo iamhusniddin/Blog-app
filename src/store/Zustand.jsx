@@ -1,10 +1,8 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const useLoader = create((set)=> ({
-        isLoading: false,
-        startLoading: ()=> set((state) => ({isLoading: true })),
-        endLoading : (payLoad)=> set(()=>{isLoading: payLoad && false})
-    })
-)
-
-export default useLoader
+const useLoader = create((set) => ({
+  isLoading: false,
+  startLoading: () => set(() => ({ isLoading: true })),
+  endLoading: (payload) => set(() => ({ isLoading: payload && false })),
+}));
+export default useLoader;
