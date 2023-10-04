@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useEffect } from "react";
-import useLoader from "../../store/zustand";
+import useLoader from "../../store";
 
 function SignIn() {
   const navigate = useNavigate();
