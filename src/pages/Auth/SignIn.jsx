@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useLoader from "../../store";
+import useUserApi from "../../service/user";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ function SignIn() {
   const [showPass, setShowPass] = useState(false);
   const pasRef = useRef();
   const [isInvalidUser, setIsInvalidUser] = useState(true);
+
+  const { signIn } = useUserApi();
 
   useEffect(() => {
     if (showPass) {
@@ -33,55 +36,49 @@ function SignIn() {
   const signInFunc = (e) => {
     const [username, password] = e.target.querySelectorAll("input");
     e.preventDefault();
-    setIsInvalidUser( /^[@_a-zA-Z]+$/.test(username.value))
-    
-    if (isInvalidUser== true) {
+    setIsInvalidUser(/^[@_a-zA-Z]+$/.test(username.value));
+
+    if (isInvalidUser == true) {
+      setIsInvalidUser(true);
       startLoading();
-      setTimeout(() => {
-        endLoading(true);
-        navigate('/')
-      }, 2000);
-      toast({
-        title: "Succesful",
-        status: "success",
-        position: "top",
-        variant: "top-accent",
-      });
+      const body = {
+        username: username.value,
+        password: password.value,
+      };
+      signIn({ ...body })
+        .then((res) => {
+          setIsInvalidUser(true);
+          endLoading();
+          if (res.data) {
+            toast({
+              title: "You're successfully logged in",
+              status: "success",
+              position: "top",
+              variant: "top-accent",
+            });
+            console.log(res.data);
+            localStorage.setItem("token", res.data?.token);
+            localStorage.setItem("my_id", res.data?.user?.id);
+            localStorage.setItem("username", res.data?.user?.username);
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          endLoading();
+          setIsInvalidUser(true);
+          toast({
+            title: err.response.data.message,
+            status: "error",
+            position: "top",
+            variant: "top-accent",
+          });
+        });
     } else {
-      setIsInvalidUser((p) => ({
-        error:'',
-        username: /^[@_a-zA-Z]+$/.test(username.value),
-      }));
-      startLoading();
-      setTimeout(() => {
-        endLoading(true);
-      }, 3000);
-      toast({
-        title: "Username or password is invalid",
-        status: "error",
-        position: "top",
-        variant: "top-accent",
-      });
+      setIsInvalidUser(/^[@_a-zA-Z]+$/.test(username.value));
     }
   };
 
-  // if(signInFunc) {
-  //   toast({
-  //     title:'Hello bro',
-  //     status:'success',
-  //     position:'top',
-  //     variant:'top-accent'
-  //   })
-  // } else {
-  //   toast({
-  //     title:'Bye bro',
-  //     status:'error',
-  //     position:'top',
-  //     variant:'top-accent'
-  //   })
-  // }
 
-  
   return (
     <div className="h-screen  w-full flex items-center justify-center flex-col">
       <div className="w-full max-w-[450px] shadow-md bg-white p-7 rounded-xl">
@@ -108,7 +105,9 @@ function SignIn() {
             id="name"
             type="text"
           />
-          {isInvalidUser == false && <p className="text-[15px] p-1 text-red-500">Invalide username</p>}
+          {isInvalidUser == false && (
+            <p className="text-[15px] p-1 text-red-500">Invalide username</p>
+          )}
           <div className="relative">
             <FormLabel className="mt-[20px]" htmlFor="password">
               Password

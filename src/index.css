@@ -22,3 +22,8 @@ background-clip: text;
 display: inline-block;
 border-bottom: 2px solid transparent;
 }
+
+.set:hover{
+  transform: rotate(90deg);
+  transition: all 0.7s linear;
+}

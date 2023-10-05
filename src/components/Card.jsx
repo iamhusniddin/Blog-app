@@ -26,7 +26,7 @@ function Card() {
         <div className="flex gap-[15px]">
 
           <p className="text-slate-400">April 29, 09:33</p>
-          <div><ViewIcon /> 0</div>
+          <div className="flex items-center gap-[5px]"><ViewIcon />0</div>
         </div>
 
         
