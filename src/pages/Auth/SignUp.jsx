@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useLoader from "../../store";
+import useUserApi from "../../service/user";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ function SignUp() {
   const [isInvalidUser, setIsInvalidUser] = useState(true);
   const pasRef1 = useRef();
   const pasRef2 = useRef();
+
+  const {signUp} = useUserApi()
 
   useEffect(() => {
     if (showPass1) {
@@ -36,34 +39,49 @@ function SignUp() {
     e.preventDefault();
     setIsInvalidUser( /^[@_a-zA-Z]+$/.test(username.value))
     
-    if (isInvalidUser== true) {
-      console.log(fullname.value, username.value, password.value, rPassword.value);
+    if (isInvalidUser== true && password.value === rPassword.value) {
+      setIsInvalidUser(true);
       startLoading();
-      setTimeout(() => {
-        endLoading(true);
-        navigate('/')
-      }, 2000);
-      toast({
-        title: "Succesful",
-        status: "success",
-        position: "top",
-        variant: "top-accent",
+      const body = {
+        username: username.value,
+        password: password.value,
+        full_name: fullname.value
+      };
+      signUp({...body})
+      .then(res=>{
+        if(res.data) {
+          endLoading(true);
+          toast({
+            title: "Now login to your new account",
+            status: "info",
+            position: "top",
+            variant: "top-accent",
+          });
+          toast({
+            title: "You're successfully register new account",
+            status: "success",
+            position: "top",
+            variant: "top-accent",
+          });
+
+         navigate("/sign-in");
+         
+        }
+      })
+     
+      .catch((err) => {  
+        setIsInvalidUser(true);
+        endLoading();
+        toast({
+          title: err.response.data.message,
+          status: "error",
+          position: "top",
+          variant: "top-accent",
+        });
       });
+
     } else {
-      setIsInvalidUser((p) => ({
-        error:'',
-        username: /^[@_a-zA-Z]+$/.test(username.value),
-      }));
-      startLoading();
-      setTimeout(() => {
-        endLoading(true);
-      }, 3000);
-      toast({
-        title: "Username or password is invalid",
-        status: "error",
-        position: "top",
-        variant: "top-accent",
-      });
+      setIsInvalidUser(/^[@_a-zA-Z]+$/.test(username.value));
     }
   };
 

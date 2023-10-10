@@ -13,14 +13,14 @@
 
 
 .card-title{
-  font-size: 28px;
-  font-weight: 500;
-  background: linear-gradient(90deg, #FF8A00 -0.07%, #8300b3 100.07%);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-display: inline-block;
-border-bottom: 2px solid transparent;
+    font-size: 28px;
+    font-weight: 500;
+    background: linear-gradient(90deg, #FF8A00 -0.07%, #8300b3 100.07%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
 }
 
 .set:hover{
