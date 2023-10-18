@@ -1,10 +1,10 @@
-
-import api from '../axios'
+import api from "../axios";
 
 function usePostApi() {
-  const getAllPosts = async() => api.get("/blog");
+  const getAllPosts = async () => api.get("/blog");
+  const getPostById = async (id) => api.get(`/blog/${id}`);
 
-  return { getAllPosts }
+  return { getAllPosts, getPostById };
 }
 
-export default usePostApi
+export default usePostApi;

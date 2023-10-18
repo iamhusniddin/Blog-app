@@ -1,22 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
 
-
-.card-title{
+.card-title {
   position: relative;
-    font-size: 28px;
-    font-weight: 500;
-    background: linear-gradient(90deg, #FF8A00 -0.07%, #8300b3 100.07%);
+  font-size: 28px;
+  font-weight: 500;
+  background: linear-gradient(90deg, #ff8a00 -0.07%, #8300b3 100.07%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -26,14 +25,14 @@
   transition: all 0.1s linear;
 }
 
-.card-title::after{
+.card-title::after {
   transition: all 0.1s linear;
   position: absolute;
   width: 100%;
   height: 0px;
   bottom: 0;
   left: 0;
-  background: linear-gradient(90deg, #FF8A00 -0.07%, #8300b3 100.07%);
+  background: linear-gradient(90deg, #ff8a00 -0.07%, #8300b3 100.07%);
   content: "";
 }
 
@@ -44,15 +43,33 @@
   bottom: -3px;
   left: 0;
   border-radius: 3px;
-  background: linear-gradient(90deg, #FF8A00 -0.07%, #8300b3 100.07%);
+  background: linear-gradient(90deg, #ff8a00 -0.07%, #8300b3 100.07%);
   content: "";
 }
 
-.set:hover{
+.set:hover {
   transform: rotate(90deg);
   transition: all 0.7s linear;
 }
 
-.subnavbar::placeholder{
+.subnavbar::placeholder {
   font-size: 18px;
+}
+
+.nohover {
+  position: relative;
+  font-size: 28px;
+  font-weight: 500;
+  background: linear-gradient(90deg, #ff8a00 -0.07%, #8300b3 100.07%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  transition: all 0.1s linear;
+}
+
+
+.det-body img {
+  border-radius: 6px;
 }

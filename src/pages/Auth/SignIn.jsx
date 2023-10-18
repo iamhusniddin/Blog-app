@@ -78,7 +78,6 @@ function SignIn() {
     }
   };
 
-
   return (
     <div className="h-screen  w-full flex items-center justify-center flex-col">
       <div className="w-full max-w-[450px] shadow-md bg-white p-7 rounded-xl">

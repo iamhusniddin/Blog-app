@@ -1,15 +1,13 @@
-import api from "../axios.js"
+import api from "../axios.js";
 
 function useUserApi() {
-
-   const signIn = async (data)=> api.post("/user/signin", data);
-   const signUp = async (data)=> api.post("/user/signup", data)
-   
+  const signIn = async (data) => api.post("/user/signin", data);
+  const signUp = async (data) => api.post("/user/signup", data);
 
   return {
     signIn,
-    signUp
-  }
+    signUp,
+  };
 }
 
-export default useUserApi
+export default useUserApi;

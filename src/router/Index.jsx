@@ -7,39 +7,37 @@ import Home from "../pages/Home";
 import CreatePost from "../pages/Post/CreatePost";
 import EditPost from "../pages/Post/EditPost";
 
-
-
 const router = createBrowserRouter([
-    {
-        path:'/',
-        element:<Layout />,
-        children: [
-            {
-                path:'/',
-                element:<Home />,
-            },
-            {
-                path:'details',
-                element: <Details/>
-            },
-            {
-                path:'create-post',
-                element:<CreatePost />
-            },
-            {
-                path:'edit-post',
-                element:< EditPost />
-            }
-        ]
-    },
-    {
-        path:'/sign-in',
-        element: <SignIn/>
-    },
-    {
-        path:'/sign-up',
-        element: <SignUp/>
-    }
-])
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "details/:id",
+        element: <Details />,
+      },
+      {
+        path: "create-post",
+        element: <CreatePost />,
+      },
+      {
+        path: "edit-post",
+        element: <EditPost />,
+      },
+    ],
+  },
+  {
+    path: "/sign-in",
+    element: <SignIn />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
+]);
 
-export default router
+export default router;

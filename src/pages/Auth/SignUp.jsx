@@ -1,4 +1,11 @@
-import { Button, FormControl, FormLabel, Input, Text, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +24,7 @@ function SignUp() {
   const pasRef1 = useRef();
   const pasRef2 = useRef();
 
-  const {signUp} = useUserApi()
+  const { signUp } = useUserApi();
 
   useEffect(() => {
     if (showPass1) {
@@ -32,54 +39,51 @@ function SignUp() {
     }
   }, [showPass1, showPass2]);
 
-
-
   const signUpFunc = (e) => {
-    const [fullname, username, password, rPassword] = e.target.querySelectorAll("input");
+    const [fullname, username, password, rPassword] =
+      e.target.querySelectorAll("input");
     e.preventDefault();
-    setIsInvalidUser( /^[@_a-zA-Z]+$/.test(username.value))
-    
-    if (isInvalidUser== true && password.value === rPassword.value) {
+    setIsInvalidUser(/^[@_a-zA-Z]+$/.test(username.value));
+
+    if (isInvalidUser == true && password.value === rPassword.value) {
       setIsInvalidUser(true);
       startLoading();
       const body = {
         username: username.value,
         password: password.value,
-        full_name: fullname.value
+        full_name: fullname.value,
       };
-      signUp({...body})
-      .then(res=>{
-        if(res.data) {
-          endLoading(true);
-          toast({
-            title: "Now login to your new account",
-            status: "info",
-            position: "top",
-            variant: "top-accent",
-          });
-          toast({
-            title: "You're successfully register new account",
-            status: "success",
-            position: "top",
-            variant: "top-accent",
-          });
+      signUp({ ...body })
+        .then((res) => {
+          if (res.data) {
+            endLoading(true);
+            toast({
+              title: "Now login to your new account",
+              status: "info",
+              position: "top",
+              variant: "top-accent",
+            });
+            toast({
+              title: "You're successfully register new account",
+              status: "success",
+              position: "top",
+              variant: "top-accent",
+            });
 
-         navigate("/sign-in");
-         
-        }
-      })
-     
-      .catch((err) => {  
-        setIsInvalidUser(true);
-        endLoading();
-        toast({
-          title: err.response.data.message,
-          status: "error",
-          position: "top",
-          variant: "top-accent",
+            navigate("/sign-in");
+          }
+        })
+
+        .catch((err) => {
+          setIsInvalidUser(true);
+          endLoading();
+          toast({
+            title: err.response.data.message,
+            status: "error",
+            position: "top",
+            variant: "top-accent",
+          });
         });
-      });
-
     } else {
       setIsInvalidUser(/^[@_a-zA-Z]+$/.test(username.value));
     }
@@ -89,31 +93,34 @@ function SignUp() {
     <div>
       <div className="h-screen  w-full flex items-center justify-center flex-col">
         <div className="w-full max-w-[450px] shadow-md bg-white p-7 rounded-xl">
-          
-            <div className="relative">
-              <ArrowBackIcon onClick={()=>navigate('/')} className="cursor-pointer text-[25px] absolute left-0 top-[50%] -translate-y-[50%] hover:text-blue-700"/>
-              <Text
-                fontSize="3xl"
-                className="font-bold text-blue-600 text-center mb-[30px]"
-              >
-                Sign up
-              </Text>
-            </div>
-            <form onSubmit={(e) => signUpFunc(e)}>
+          <div className="relative">
+            <ArrowBackIcon
+              onClick={() => navigate("/")}
+              className="cursor-pointer text-[25px] absolute left-0 top-[50%] -translate-y-[50%] hover:text-blue-700"
+            />
+            <Text
+              fontSize="3xl"
+              className="font-bold text-blue-600 text-center mb-[30px]"
+            >
+              Sign up
+            </Text>
+          </div>
+          <form onSubmit={(e) => signUpFunc(e)}>
             <FormLabel htmlFor="name">Full name</FormLabel>
             <Input id="name" type="text" />
             <FormLabel htmlFor="username">User name</FormLabel>
-          <Input
-            onChange={(e) =>
-              setIsInvalidUser(/^[@_a-zA-Z]+$/.test(e.target.value))
-            }
-            isInvalid={!isInvalidUser}
-            required
-            id="username"
-            type="text"
-          />
-          {isInvalidUser == false && <p className="text-[15px] p-1 text-red-500">Invalide username</p>}
-            
+            <Input
+              onChange={(e) =>
+                setIsInvalidUser(/^[@_a-zA-Z]+$/.test(e.target.value))
+              }
+              isInvalid={!isInvalidUser}
+              required
+              id="username"
+              type="text"
+            />
+            {isInvalidUser == false && (
+              <p className="text-[15px] p-1 text-red-500">Invalide username</p>
+            )}
 
             <div className="relative">
               <FormLabel className="mt-[20px]" htmlFor="password">
@@ -151,7 +158,12 @@ function SignUp() {
               )}
             </div>
 
-            <Button isLoading={isLoading} type="submit" className="w-full mt-[30px]" colorScheme="blue">
+            <Button
+              isLoading={isLoading}
+              type="submit"
+              className="w-full mt-[30px]"
+              colorScheme="blue"
+            >
               Sign up
             </Button>
           </form>
