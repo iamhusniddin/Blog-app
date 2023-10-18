@@ -7,7 +7,7 @@ import { AddIcon, SettingsIcon } from "@chakra-ui/icons";
 function Navbar() {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="ml-[50px]">
       <nav className="w-full max-w-[1200px] mx-auto px-[10px]">
         <div className="flex justify-between items-center">
           <img
@@ -34,7 +34,7 @@ function Navbar() {
           </div>)}
         </div>
       </nav>
-    </>
+    </div>
   );
 }
 

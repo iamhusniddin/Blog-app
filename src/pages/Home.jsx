@@ -42,7 +42,7 @@ function Home() {
   },[])
   console.log(posts);
   return (
-    <div>
+    <div className='ml-[50px]'>
       <SubNavbar />
       {isLoading ? <Loader/> :  (posts?.map((post)=> <Card key={post.id} {...post}/>))}
       
